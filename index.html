@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Zispl - It Solutions">
+
+    <!-- ========== Page Title ========== -->
+    <title>Zispl - It Solutions</title>
+
+    <!-- ========== Favicon Icon ========== -->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!-- ========== Start Stylesheet ========== -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/css/themify-icons.css" rel="stylesheet" />
+    <link href="assets/css/elegant-icons.css" rel="stylesheet" />
+    <link href="assets/css/flaticon-set.css" rel="stylesheet" />
+    <link href="assets/css/magnific-popup.css" rel="stylesheet" />
+    <link href="assets/css/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="assets/css/animate.css" rel="stylesheet" />
+    <link href="assets/css/validnavs.css" rel="stylesheet" />
+    <link href="assets/css/helper.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet">
+    <!-- ========== End Stylesheet ========== -->
+
+    <!-- <style>
+        .open-button {
+  background-color: #02218f;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+  z-index: 9;
+}
+
+
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 999;
+}
+
+
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+  z-index: 999;
+}
+
+
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+.form-container .btn {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+
+.form-container .cancel {
+  background-color: 0c0b0cd6;
+}
+
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+    </style> -->
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
+        /* Chatbot */
+        .botIcon {
+            bottom: 15px;
+            right: 15px;
+            position: fixed;
+            z-index: 9999;
+
+        }
+
+        .iconInner {
+            -webkit-align-items: center;
+            -ms-align-items: center;
+            align-items: center;
+            background: #a64bf4;
+            background: linear-gradient(to right, #02218f, #0e72e3, #02218f);
+            /* background: -webkit-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+    background: -o-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+    background: -moz-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+    background: linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff); */
+            background-position: 50%;
+            background-size: 300%;
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            font-size: 1.7em;
+            height: 2em;
+            justify-content: center;
+            width: 2em;
+        }
+
+        .botSubject,
+        .messages,
+        .showBotSubject .botIconContainer,
+        .showMessenger .botIconContainer {
+            display: none;
+        }
+
+        .botIcon:not(.showMessenger) .messengerHolder {
+            display: none;
+        }
+
+        .botIcon .Messages,
+        .botIcon .Messages_list {
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+        }
+
+        .chat_close_icon {
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            right: 12px;
+            z-index: 9;
+        }
+
+        .chat_on {
+            background-color: #8a57cf;
+            bottom: 20px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+            color: #fff;
+            cursor: pointer;
+            display: block;
+            height: 45px;
+            padding: 9px;
+            position: fixed;
+            right: 15px;
+            text-align: center;
+            width: 45px;
+            z-index: 10;
+        }
+
+        .chat_on_icon {
+            color: #fff;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .botIcon .Layout {
+            -webkit-animation: appear .15s cubic-bezier(.25, .25, .5, 1.1);
+            -ms-animation: appear .15s cubic-bezier(.25, .25, .5, 1.1);
+            animation: appear .15s cubic-bezier(.25, .25, .5, 1.1);
+            -webkit-animation-fill-mode: forwards;
+            -ms-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            background-color: rgb(63, 81, 181);
+            bottom: 20px;
+            right: 15px;
+            border-radius: 10px;
+            box-shadow: 5px 0 20px 5px rgba(0, 0, 0, .1);
+            box-sizing: content-box !important;
+            color: rgb(255, 255, 255);
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: end;
+            -webkit-justify-content: flex-end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+            max-height: 30px;
+            max-width: 300px;
+            min-width: 50px;
+            opacity: 0;
+            pointer-events: auto;
+            position: fixed;
+            -webkit-transition: right .1s cubic-bezier(.25, .25, .5, 1), bottom .1s cubic-bezier(.25, .25, .5, 1), min-width .2s cubic-bezier(.25, .25, .5, 1), max-width .2s cubic-bezier(.25, .25, .5, 1), min-height .2s cubic-bezier(.25, .25, .5, 1), max-height .2s cubic-bezier(.25, .25, .5, 1), border-radius 50ms cubic-bezier(.25, .25, .5, 1) .15s, background-color 50ms cubic-bezier(.25, .25, .5, 1) .15s, color 50ms cubic-bezier(.25, .25, .5, 1) .15s;
+            -ms-transition: right .1s cubic-bezier(.25, .25, .5, 1), bottom .1s cubic-bezier(.25, .25, .5, 1), min-width .2s cubic-bezier(.25, .25, .5, 1), max-width .2s cubic-bezier(.25, .25, .5, 1), min-height .2s cubic-bezier(.25, .25, .5, 1), max-height .2s cubic-bezier(.25, .25, .5, 1), border-radius 50ms cubic-bezier(.25, .25, .5, 1) .15s, background-color 50ms cubic-bezier(.25, .25, .5, 1) .15s, color 50ms cubic-bezier(.25, .25, .5, 1) .15s;
+            transition: right .1s cubic-bezier(.25, .25, .5, 1), bottom .1s cubic-bezier(.25, .25, .5, 1), min-width .2s cubic-bezier(.25, .25, .5, 1), max-width .2s cubic-bezier(.25, .25, .5, 1), min-height .2s cubic-bezier(.25, .25, .5, 1), max-height .2s cubic-bezier(.25, .25, .5, 1), border-radius 50ms cubic-bezier(.25, .25, .5, 1) .15s, background-color 50ms cubic-bezier(.25, .25, .5, 1) .15s, color 50ms cubic-bezier(.25, .25, .5, 1) .15s;
+            z-index: 999999999;
+        }
+
+        .botIcon .Layout-open {
+            border-radius: 10px;
+            color: #fff;
+            height: 500px;
+            max-height: 500px;
+            max-width: 300px;
+            overflow: hidden;
+            -webkit-transition: right .1s cubic-bezier(.25, .25, .5, 1), bottom .1s cubic-bezier(.25, .25, .5, 1.1), min-width .2s cubic-bezier(.25, .25, .5, 1.1), max-width .2s cubic-bezier(.25, .25, .5, 1.1), max-height .2s cubic-bezier(.25, .25, .5, 1.1), min-height .2s cubic-bezier(.25, .25, .5, 1.1), border-radius 0ms cubic-bezier(.25, .25, .5, 1.1), background-color 0ms cubic-bezier(.25, .25, .5, 1.1), color 0ms cubic-bezier(.25, .25, .5, 1.1);
+            -ms-transition: right .1s cubic-bezier(.25, .25, .5, 1), bottom .1s cubic-bezier(.25, .25, .5, 1.1), min-width .2s cubic-bezier(.25, .25, .5, 1.1), max-width .2s cubic-bezier(.25, .25, .5, 1.1), max-height .2s cubic-bezier(.25, .25, .5, 1.1), min-height .2s cubic-bezier(.25, .25, .5, 1.1), border-radius 0ms cubic-bezier(.25, .25, .5, 1.1), background-color 0ms cubic-bezier(.25, .25, .5, 1.1), color 0ms cubic-bezier(.25, .25, .5, 1.1);
+            transition: right .1s cubic-bezier(.25, .25, .5, 1), bottom .1s cubic-bezier(.25, .25, .5, 1.1), min-width .2s cubic-bezier(.25, .25, .5, 1.1), max-width .2s cubic-bezier(.25, .25, .5, 1.1), max-height .2s cubic-bezier(.25, .25, .5, 1.1), min-height .2s cubic-bezier(.25, .25, .5, 1.1), border-radius 0ms cubic-bezier(.25, .25, .5, 1.1), background-color 0ms cubic-bezier(.25, .25, .5, 1.1), color 0ms cubic-bezier(.25, .25, .5, 1.1);
+            width: 100%;
+        }
+
+        .botIcon .Layout-expand {
+            display: none;
+            height: 400px;
+            max-height: 100vh;
+            min-height: 300px;
+        }
+
+        .showBotSubject.botIcon .Layout-expand {
+            display: block;
+        }
+
+        .botIcon .Layout-mobile {
+            bottom: 10px
+        }
+
+        .botIcon .Layout-mobile.Layout-open {
+            min-width: calc(100% - 20px);
+            width: calc(100% - 20px);
+        }
+
+        .botIcon .Layout-mobile.Layout-expand {
+            border-radius: 0 !important;
+            bottom: 0;
+            height: 100%;
+            min-height: 100%;
+            min-width: 100%;
+            width: 100%;
+        }
+
+        .botIcon .Messenger_messenger {
+            height: 100%;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            position: relative;
+            width: 100%;
+        }
+
+        .botIcon .Messenger_header,
+        .botIcon .Messenger_messenger {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .botIcon .Messenger_header {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: rgb(22, 46, 98);
+            color: rgb(255, 255, 255);
+            -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            height: 40px;
+            padding-left: 10px;
+            padding-right: 40px;
+        }
+
+        .botIcon .Messenger_header h4 {
+            -webkit-animation: slidein .15s .3s;
+            -ms-animation: slidein .15s .3s;
+            animation: slidein .15s .3s;
+            -webkit-animation-fill-mode: forwards;
+            -ms-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            font-size: 16px;
+            opacity: 0;
+        }
+
+        .botIcon .Messenger_prompt {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 18px;
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .botIcon .Messenger_content {
+            background-color: #fff;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            height: 80px;
+        }
+
+        .botIcon .Messages {
+            background-color: #fff;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-shrink: 1;
+            -ms-flex-negative: 1;
+            flex-shrink: 1;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 10px;
+            position: relative;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .botIcon .Input {
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #e6ebea;
+            color: #96aab4;
+            -webkit-box-flex: 0;
+            -webkit-flex-grow: 0;
+            -ms-flex-positive: 0;
+            flex-grow: 0;
+            -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            padding-bottom: 15px;
+            padding-top: 17px;
+            position: relative;
+            width: 100%;
+        }
+
+        .botIcon .Input-blank .Input_field {
+            max-height: 20px;
+        }
+
+        .Input_field {
+            padding: 16px;
+        }
+
+        .botIcon .Input_field {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding-left: 20px;
+            padding-right: 45px;
+            resize: none;
+            width: 100%;
+            font-size: 14px;
+            line-height: 20px;
+            min-height: 20px !important;
+            border: 1px solid grey;
+            border-radius: 20px;
+        }
+
+        .botIcon .Input_button-emoji {
+            right: 45px;
+        }
+
+        .botIcon .Input_button {
+            background-color: transparent;
+            border: none;
+            bottom: 15px;
+            cursor: pointer;
+            height: 25px;
+            outline: none;
+            padding: 0;
+            position: absolute;
+            width: 25px;
+        }
+
+        .botIcon .Input_button-send {
+            right: 15px;
+            bottom: 20px;
+        }
+
+        .botIcon .Input-emoji .Input_button-emoji .Icon,
+        .botIcon .Input_button:hover .Icon {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            -webkit-transition: all .1s ease-in-out;
+            -ms-transition: all .1s ease-in-out;
+            transition: all .1s ease-in-out;
+        }
+
+        .botIcon .Input-emoji .Input_button-emoji .Icon path,
+        .botIcon .Input_button:hover .Icon path {
+            fill: #2c2c46;
+        }
+
+        .Icon svg {
+            height: auto;
+            width: 100%;
+        }
+
+        .msg {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .msg.user {
+            -webkit-box-direction: row-reverse;
+            -webkit-flex-direction: row-reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+        }
+
+        .msg+.msg {
+            margin-top: 15px;
+        }
+
+        span.avtr {
+            display: inline-block;
+            width: 30px;
+        }
+
+        .msg.user span.avtr+span.responsText {
+            margin-left: 0;
+            margin-right: 10px;
+            width: auto;
+        }
+
+        span.responsText {
+            color: #000;
+            width: 100%;
+        }
+
+        span.avtr+span.responsText {
+            color: #000;
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: top;
+            max-width: calc(100% - 50px);
+        }
+
+        span.avtr figure {
+            background-color: #ccc;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 50%;
+            display: block;
+            margin: 0;
+            padding-bottom: 100%;
+        }
+
+        .responsText .btns_link {
+            border: 2px solid #8a92b2;
+            border-radius: 10px;
+            display: inline-block;
+            font-size: 0.85em;
+            margin: 5px;
+            padding: 5px;
+            -webkit-transition: all .25s ease-in-out;
+            -ms-transition: all .25s ease-in-out;
+            transition: all .25s ease-in-out;
+            width: auto;
+        }
+
+        .responsText .btns_link:hover {
+            background-color: #8a92b2;
+            color: #fff;
+        }
+
+        .responsText .btns_link.alterBtn {
+            background-color: #8a92b2;
+            color: #fff;
+            display: block;
+            text-align: center;
+        }
+
+        .responsText .btns_link.alterBtn:focus,
+        .responsText .btns_link.alterBtn:hover {
+            background-color: transparent;
+            color: #000;
+        }
+
+        @-webkit-keyframes appear {
+            0% {
+                opacity: 0;
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @-ms-keyframes appear {
+            0% {
+                opacity: 0;
+                -ms-transform: scale(0);
+                transform: scale(0);
+            }
+
+            100% {
+                opacity: 1;
+                -ms-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @-webkit-keyframes slidein {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateX(10px);
+                transform: translateX(10px);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+        }
+
+        @-ms-keyframes slidein {
+            0% {
+                opacity: 0;
+                -ms-transform: translateX(10px);
+                transform: translateX(10px);
+            }
+
+            100% {
+                opacity: 1;
+                -ms-transform: translateX(0);
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slidein {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateX(10px);
+                transform: translateX(10px);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .botIcon .Layout-open {
+                border-radius: 0;
+                bottom: 0;
+                height: 100%;
+                left: 0;
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a6a3634bb7.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <!--[if lte IE 9]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+    <!-- Preloader Start -->
+    <div class="se-pre-con"></div>
+    <!-- Preloader Ends -->
+
+    <!-- Start Header Top 
+    ============================================= -->
+    <div class="top-bar text-light top-style-one p-2">
+        <div class="container-fill pr">
+            <div class="row align-center">
+                <marquee class="text-dark">Current Openings..... </marquee>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top -->
+
+    <!-- Header 
+    ============================================= -->
+    <header>
+        <!-- Start Navigation -->
+        <nav
+            class="navbar mobile-sidenav small-pad brand-style-bg nav-border attr-border navbar-sticky navbar-default validnavs">
+
+            <!-- Start Top Search -->
+            <div class="top-search">
+                <div class="container-xl">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-bars"></i></span>
+                        <input type="text" class="form-control" placeholder="Search">
+                        <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                    </div>
+                </div>
+            </div>
+            <!-- End Top Search -->
+
+            <div class="container-fill pr">
+
+
+                <div class="row align-center">
+                    <!-- Start Header Navigation -->
+                    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-1 col-1 ml-auto">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#navbar-menu">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/img/ZISPL_Logo1.png" class="logo logo-display" alt="Logo">
+                                <img src="assets/img/ZISPL_Logo1.png" class="logo logo-scrolled" alt="Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Header Navigation -->
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="col-xl-9 col-lg-9 col-md-4 col-sm-4 col-4 text-center">
+                        <div class="collapse navbar-collapse" id="navbar-menu">
+
+                            <img src="assets/img/ZISPL_Logo1.png" alt="Logo">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#navbar-menu">
+                                <i class="fa fa-times"></i>
+                            </button>
+
+                            <ul class="nav navbar-nav navbar-right text-dark" data-in="fadeInDown" data-out="fadeOutUp">
+                                <li class="dropdown ">
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li><a href="about-us.html">About Us</a></li>
+
+
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Services</a>
+                                    <ul class="dropdown-menu">
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Technology
+                                                Solutions</a>
+                                            <ul class="dropdown-menu">
+
+                                                <li class="dropdown">
+                                                    <a href="hr-solutions.html" class="dropdown-toggle"
+                                                        data-toggle="dropdown">Application Developement</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#">Web Development </a></li>
+                                                        <li><a href="#">Mobile App Development</a></li>
+                                                        <li><a href="#">Cross Platform</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="hr-solutions.html" class="dropdown-toggle"
+                                                        data-toggle="dropdown">Digital Marketing</a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#">Search Engine Optimization</a></li>
+                                                        <li><a href="#">Social Media Optimization </a></li>
+                                                        <li><a href="#">Web Designing </a></li>
+                                                        <li><a href="#">Video Making </a></li>
+                                                    </ul>
+                                                </li>
+
+
+                                            </ul>
+                                        </li>
+
+
+                                        <li class="dropdown">
+                                            <a href="learning-solutions.html" class="dropdown-toggle"
+                                                data-toggle="dropdown">Learning Solutions</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="services-2.html">Content Development</a></li>
+                                                <li><a href="Localization.html">Localization</a></li>
+                                                <li><a href="classroom.html">Classroom</a></li>
+                                                <li><a href="m-learning.html">M-learning</a></li>
+                                                <li><a href="blended.html">Blended</a></li>
+                                                <li><a href="e-learning.html">E-learning / Videos</a></li>
+                                                <li><a href="nuggets.html">Nuggets / Snippets</a></li>
+                                                <li><a href="video-shoot.html">Video Shoot and Voice Overs</a></li>
+                                                <li><a href="learning-solutions-engagement-model.html">Engagement
+                                                        Model</a></li>
+                                            </ul>
+                                        </li>
+
+
+                                        <li class="dropdown">
+                                            <a href="hr-solutions.html" class="dropdown-toggle"
+                                                data-toggle="dropdown">HR Solutions</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="remotely.html">Remotely</a></li>
+                                                <li><a href="on-promise.html">On-premise</a></li>
+                                                <li><a href="placements.html">Executive Placements / Hiring</a></li>
+                                                <li><a href="hrprocess.html">HR Process Outsourcing</a></li>
+                                                <li><a href="hrengagements.html">Engagement Model</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="training-solutions.html" class="dropdown-toggle"
+                                                data-toggle="dropdown">Training Solutions</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="it-domain.html">IT Domain</a></li>
+                                                <li><a href="industrial.html">Other Industrial Training</a></li>
+                                                <li><a href="softskills.html">Soft Skills</a></li>
+                                                <li><a href="leadership.html">Leadership</a></li>
+                                                <li><a href="campus.html">Campus to Corporate</a></li>
+                                                <li><a href="training-on-promise.html">On-premise</a></li>
+                                                <li><a href="collaboration.html">Remotely Using Collaboration
+                                                        Platforms</a></li>
+                                                <li><a href="training-solutions-engagement-model.html">Engagement
+                                                        Model</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Our Portfolio</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle"
+                                                data-toggle="dropdown">Our Partners</a>
+                                            <a href="insights.html" class="dropdown-toggle"
+                                                data-toggle="dropdown">Insights</a>
+                                            <a href="success-stories.html" class="dropdown-toggle"
+                                                data-toggle="dropdown">Success Stories</a>
+                                            <a href="blogs.html" class="dropdown-toggle" data-toggle="dropdown">Blog</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="careers.html">Careers</a></li>
+                                <li><a href="contact-us.html">Contact us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.navbar-collapse -->
+
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-7 col-1">
+                        <div class="attr-right d-flex justify-content-between text-right">
+                            <!-- Start Atribute Navigation -->
+                            <div class="attr-nav">
+                                <ul>
+                                    <!-- <li class="search"><a href="#"><i class="far fa-search"></i></a></li> -->
+                                    <li class="button">
+                                        <a href="#"><i class="fa fa-cart-shopping"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End Atribute Navigation -->
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <!-- Overlay screen for menu -->
+                <div class="overlay-screen"></div>
+                <!-- End Overlay screen for menu -->
+
+            </div>
+
+        </nav>
+        <!-- End Navigation -->
+
+    </header>
+    <!-- End Header -->
+
+    <!-- Start Banner Area 
+    ============================================= -->
+    <div
+        class="banner-area banner-style-one content-right navigation-custom-large zoom-effect overflow-hidden text-light">
+        <!-- Slider main container -->
+        <div class="banner-fade">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+
+                <!-- Single Item -->
+                <div class="swiper-slide banner-style-one">
+                    <div class="banner-thumb bg-cover shadow dark" style="background: url(assets/img/banner/16.jpg);">
+                    </div>
+                    <div class="container">
+                        <div class="row align-center">
+                            <div class="col-xl-7 offset-xl-5">
+                                <div class="content">
+                                    <h1 class="fw-700">WELCOME TO ZISPL</h1>
+                                    <!-- <h2>Creating a better <strong>Tech solutions</strong></h2> -->
+                                    <h5>We strive to excel and help unlock your potential. We innovate and have the
+                                        competency,<br> attitude and mindset to deliver.</h5>
+                                    <div class="button">
+                                        <a class="btn btn-gradient btn-md radius animation" href="about-us.html">About
+                                            us</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shape -->
+                    <!-- <div class="banner-angle-shape">
+                        <div class="shape-item"></div>
+                        <div class="shape-item"></div>
+                        <div class="shape-item"></div>
+                    </div> -->
+                    <!-- End Shape -->
+                </div>
+                <!-- End Single Item -->
+
+                <!-- Single Item -->
+                <div class="swiper-slide banner-style-one">
+                    <div class="banner-thumb bg-cover shadow dark" style="background: url(assets/img/banner/28.jpg);">
+                    </div>
+                    <div class="container">
+                        <div class="row align-center">
+                            <div class="col-xl-7 offset-xl-5">
+                                <div class="content">
+                                    <h1 class="fw-700">WHO WE ARE</h1>
+                                    <h5>One-stop shop delivering effective solutions to solve your business problems.
+                                    </h5>
+                                    <!-- <h2>Transform every <strong>technical process</strong></h2> -->
+                                    <div class="button">
+                                        <a class="btn btn-gradient btn-md radius animation" href="about-us.html">About
+                                            us</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shape -->
+                    <!-- <div class="banner-angle-shape">
+                        <div class="shape-item"></div>
+                        <div class="shape-item"></div>
+                        <div class="shape-item"></div>
+                    </div> -->
+                    <!-- End Shape -->
+                </div>
+                <!-- End Single Item -->
+                <!-- Single Item -->
+                <div class="swiper-slide banner-style-one">
+                    <div class="banner-thumb bg-cover shadow dark" style="background: url(assets/img/banner/28.jpg);">
+                    </div>
+                    <div class="container">
+                        <div class="row align-center">
+                            <div class="col-xl-7 offset-xl-5">
+                                <div class="content">
+                                    <h1 class="fw-700">WHAT WE DELIVER</h1>
+                                    <h5>eLearning, Virtual & Classroom ILT, Gamification, Game-based Learning, Micro
+                                        Learning <br> and Spaced Learning</h5>
+                                    <!-- <h2>Transform every <strong>technical process</strong></h2> -->
+                                    <div class="button">
+                                        <a class="btn btn-gradient btn-md radius animation" href="about-us.html">About
+                                            us</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shape -->
+                    <!-- <div class="banner-angle-shape">
+                        <div class="shape-item"></div>
+                        <div class="shape-item"></div>
+                        <div class="shape-item"></div>
+                    </div> -->
+                    <!-- End Shape -->
+                </div>
+                <!-- End Single Item -->
+
+            </div>
+
+            <!-- Navigation -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div>
+    </div>
+    <!-- End Main -->
+
+    <!-- Start About 
+    ============================================= -->
+    <div class="about-area  pb-md-110 pb-xs-45 overflow-hidden ">
+        <div class="container">
+            <div class="about-style-one-box">
+                <div class="row">
+
+
+                    <div class="about-style-one col-xl-3 col-lg-3">
+
+                        <!-- <div class="thumb">
+                            <img src="assets/img/about/5.jpg" alt="Thumb">
+                          
+                          
+                            <div class="award" >
+                                <div class="icon">
+                                    <i class="flaticon-medal"></i>
+                                </div>
+                                <div class="info">
+                                    <h4>Certified Company</h4>
+                                    <p>
+                                        We adapt our delivery to the way your work, whether as an external provider.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="thumb-shape">
+                                <div class="shape"></div>
+                                <div class="shape"></div>
+                                <div class="shape"></div>
+                                <div class="shape"></div>
+                                <div class="shape"></div>
+                            </div>
+                        </div> -->
+                    </div>
+
+
+
+                    <div class="about-style-one pl-lg-30 pl-70 pl-md-15 pl-xs-15 col-xl-9 col-lg-9">
+                        <div class="info">
+                            <h4 class="sub-heading mb-20">Who we are</h4>
+                            <!-- <h2 class="heading">Preparing for your success <br> trusted source in IT services</h2> -->
+                            <p class="mb-0">
+                                zKonsult Innovative Solutions Private Limited (ZISPL) is an initiative taken by three
+                                women entrepreneurs who decided to come out of their comfort zones and take on the
+                                stride of bringing transformation into the lives of people who they would work with in
+                                any format of the role. Laying the foundation of the company, getting it registered, and
+                                the journey of ZISPL got initiated.
+                            </p>
+                            <ul class="short-feature-list">
+                                <li>
+                                    <h4><a href="#"><span class="span-heading">Technology</span> Solutions</a></h4>
+                                    <p>
+                                        Change content.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h4><a href="learning-solutions.html"><span class="span-heading">Learning</span> Solutions</a></h4>
+                                    <p>
+                                        Transforming the way learning solutions are developed from being title centric
+                                        to being more of user centric.
+                                    </p>
+                                </li>
+                            </ul>
+                            <ul class="short-feature-list">
+                                <li>
+                                    <h4><a href="hr-solutions.html"><span class="span-heading">HR</span> Solutions</a></h4>
+                                    <p>
+                                        Identifying, Onboarding, Managing, and Retaining skills is becoming critical for
+                                        any organization.
+                                    </p>
+                                </li>
+                                <li>
+                                    <h4><a href="#"><span class="span-heading">Training</span> Solutions</a></h4>
+                                    <p>
+                                        Change content.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="experience">
+                            <div class="shape-bottom-large"></div>
+                            <div class="left">
+                                <h2>4</h2>
+                                <h4>Years <br> of experience</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shape -->
+        <div class="shape-left-top" style="background-image: url(assets/img/shape/1.png);"></div>
+        <!-- End Shape -->
+
+        <!-- Shape -->
+        <div class="shape-animated">
+            <img src="assets/img/shape/11.png" alt="Shape">
+        </div>
+        <!-- End Shape -->
+
+        <!-- Shape -->
+        <div class="blur-bg"></div>
+        <!-- End Shape -->
+
+
+    </div>
+    <!-- End About -->
+
+    <!-- Start Achivement 
+    ============================================= -->
+    <div class="achivement-area default-padding-bottom">
+        <div class="top-shape-120" style="background: unset;"></div>
+        <div class="container">
+            <h3 class="text-center fw-600 mb-5" >A RECORD THAT SPEAKS FOR ITSELF</h3>
+            <div class="row cards">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4 achivement-style-one">
+                    <div class="card item  bg-white">
+                        <div class="card-block row">
+                            <div class="col-lg-4">
+                            <!-- <i class="fa-solid fa-city card-icon"></i> -->
+                            <img src="assets/img/card-1.jpeg" >
+                            </div>
+                            <div class="col-lg-8">
+                            <h4 class="card-title text-dark">3 of 20</h4>
+                            <p class=" text-dark">clients are global mnc corporates</p>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-4 achivement-style-one">
+                    <div class="card item text-white" style="background-image: url(assets/img/banner/33.jpg);">
+                        <div class="card-block">
+                            <i class="fa-solid fa-calendar-check card-icon"></i>
+                            <h4 class="card-title">3 Step Checkout</h4>
+                            <p class="card-text">A frictionless checkout process delivers a superior user experience
+                                every-time the user makes a payment. </p>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-lg-4 achivement-style-one">
+                    <div class="card item  bg-white">
+                        <div class="card-block row">
+                            <div class="col-lg-4">
+                            <!-- <i class="fa-solid fa-city card-icon"></i> -->
+                            <img src="assets/img/card-2.jpeg" >
+                            </div>
+                            <div class="col-lg-8">
+                            <h4 class="card-title text-dark">95%</h4>
+                            <p class=" text-dark">of our clients are happy for our openness, honesty, sincerity, accuracy and timeliness</p>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+
+            <div class="row cards mt-4">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4 achivement-style-one">
+                    <div class="card item  bg-white">
+                        <div class="card-block row">
+                            <div class="col-lg-4">
+                            <!-- <i class="fa-solid fa-city card-icon"></i> -->
+                            <img src="assets/img/card-3.jpeg" >
+                            </div>
+                            <div class="col-lg-8">
+                            <h4 class="card-title text-dark">92%</h4>
+                            <p class=" text-dark">are satisfied clients</p>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 achivement-style-one">
+                    <div class="card item  bg-white">
+                        <div class="card-block row">
+                            <div class="col-lg-4">
+                            <!-- <i class="fa-solid fa-city card-icon"></i> -->
+                            <img src="assets/img/card-4.jpeg" >
+                            </div>
+                            <div class="col-lg-8">
+                            <h4 class="card-title text-dark">8 in 10</h4>
+                            <p class=" text-dark">clients choose us primarily</p>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Achivement -->
+
+    <!-- Start Why Choose Us 
+    ============================================= -->
+    <!-- <div class="choose-us-area default-padding-bottom">
+        <div class="shape" style="background-image: url(assets/img/shape/38.png);"></div>
+        <div class="container">
+            <div class="row">
+                <div class="choose-us-style-one col-xl-5 col-lg-5">
+                    <h4 class="sub-heading">Why choose us</h4>
+                    <h2 class="heading">Our goal is giving the <br> best our customers </h2>
+                    <p class="mb--5">
+                        The intellectual capital is the core to the success of a business and we are a firm believer in building professional relationships. The team that has come together to lay the foundation of ZISPL are a set of professionals who have the passion to make a positive difference in the lives of every individual they connect with, be it a client, a team member, or an investor/shareholder.
+                    </p>
+                    <a class="btn mt-30 btn-md btn-theme" href="about-us.html">Know More</a>
+                </div>
+                <div class="choose-us-style-one text-center col-xl-6 offset-xl-1 col-lg-7">
+                    <div class="right-item">
+                        <div class="row">
+
+                            <div class="choose-us-card col-md-6">
+                                <div class="item">
+                                    <img src="assets/img/M-learning-01-1.png" alt="Icon">
+                                    <span>Learning Solutions</span>
+                                    <h4>M-Learning</h4>
+                                    <a href="m-learning.html">Read More</a>
+                                </div>
+                            </div>
+                           
+                            <div class="choose-us-card col-md-6">
+                                <div class="item">
+                                    <img src="assets/img/Training-solution2-01-1.png" alt="Icon">
+                                    <span>TRAINING SOLUTIONS</span>
+                                    <h4>IT Domain</h4>
+                                    <a href="it-domain.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+    <!-- End Why Choose Us -->
+
+    <!-- Start Brand 
+    ============================================= -->
+    <!-- <div class="brand-area">
+        <div class="container">
+            <div class="brand-items pt-80 pb-80">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="brand-carousel swiper">
+                           
+                            <div class="swiper-wrapper">
+                               
+                                <div class="swiper-slide">
+                                    <img src="assets/img/logo/1.png" alt="Thumb">
+                                </div>
+                               
+                                <div class="swiper-slide">
+                                    <img src="assets/img/logo/2.png" alt="Thumb">
+                                </div>
+                               
+                                <div class="swiper-slide">
+                                    <img src="assets/img/logo/3.png" alt="Thumb">
+                                </div>
+                               
+                                <div class="swiper-slide">
+                                    <img src="assets/img/logo/4.png" alt="Thumb">
+                                </div>
+                               
+                                <div class="swiper-slide">
+                                    <img src="assets/img/logo/5.png" alt="Thumb">
+                                </div>
+                               
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- End Brand -->
+
+    <!-- Start Projects 
+    ============================================= -->
+    <!--  <div class="projects-area default-padding bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h4 class="sub-title">Case Studies</h4>
+                        <h2 class="title">Latest showcase and <br> solutions to our customers!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="masonary">
+                        <div class="gallery-items text-center colums-3 mixed"> -->
+    <!-- Single Item -->
+    <!-- <div class="gallery-item gallery-style-one">
+                                <div class="item gallery-mixed-item active">
+                                    <div class="thumb">
+                                        <img src="assets/img/portfolio/15.jpg" alt="Thumb">
+                                    </div>
+                                    <div class="content">
+                                        <div class="info">
+                                            <h4><a href="project-details.html">IT DOMAIN</a></h4>
+                                            <span>Technology</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+
+    <!-- Single Item -->
+    <!-- <div class="gallery-item gallery-style-one">
+                                <div class="item gallery-mixed-item">
+                                    <div class="thumb">
+                                        <img src="assets/img/portfolio/13.jpg" alt="Thumb">
+                                    </div>
+                                    <div class="content">
+                                        <div class="info">
+                                            <h4><a href="project-details.html">SOFT SKILLS</a></h4>
+                                            <span>Technology</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+
+    <!-- Single Item -->
+    <!-- <div class="gallery-item gallery-style-one">
+                                <div class="item gallery-mixed-item">
+                                    <div class="thumb">
+                                        <img src="assets/img/portfolio/3.jpg" alt="Thumb">
+                                    </div>
+                                    <div class="content">
+                                        <div class="info">
+                                            <h4><a href="project-details.html">CAMPUS TO CORPORATE</a></h4>
+                                            <span>Technology</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+
+    <!-- Single Item -->
+    <!--  <div class="gallery-item gallery-style-one">
+                                <div class="item gallery-mixed-item">
+                                    <div class="thumb">
+                                        <img src="assets/img/portfolio/5.jpg" alt="Thumb">
+                                    </div>
+                                    <div class="content">
+                                        <div class="info">
+                                            <h4><a href="project-details.html">LEARNING SOLUTIONS</a></h4>
+                                            <span>Technology</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- Single Item -->
+
+    <!-- Single Item -->
+    <!--  <div class="gallery-item gallery-style-one">
+                                <div class="item gallery-mixed-item">
+                                    <div class="thumb">
+                                        <img src="assets/img/portfolio/7.jpg" alt="Thumb">
+                                    </div>
+                                    <div class="content">
+                                        <div class="info">
+                                            <h4><a href="project-details.html">HR SOLUTIONS</a></h4>
+                                            <span>Technology</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+
+    <!-- Single Item -->
+    <!-- <div class="gallery-item gallery-style-one">
+                                <div class="item gallery-mixed-item">
+                                    <div class="thumb">
+                                        <img src="assets/img/portfolio/8.jpg" alt="Thumb">
+                                    </div>
+                                    <div class="content">
+                                        <div class="info">
+                                            <h4><a href="project-details.html">TRAINING SOLUTIONS</a></h4>
+                                            <span>Technology</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- Single Item -->
+
+    <!-- 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- End Projects -->
+
+    <!-- Start Process
+    ============================================= -->
+    <!-- <div class="process-area bg-dark text-light default-padding">
+        <div class="container">
+            <div class="row align-center">
+                <div class="col-xl-6 col-lg-5">
+                    <div class="process-style-one">
+                        <div class="thumb">
+                            <img src="assets/img/illustration/3.png" alt="Thumb">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 offset-xl-1 col-lg-6 offset-lg-1">
+                    <div class="processs-style-one">
+                        <h4 class="sub-heading">Our Solutions</h4>
+                        <h2 class="heading">How do we manage <br> IT services for your industry</h2>
+                        <ul class="process-list">
+                            <li>
+                                <img src="assets/img/shape/arrow.png" alt="Arrrow">
+                                <h4>Receive Custom Plan</h4>
+                                <p>
+                                    Arose mr rapid in so vexed words. Gay welcome led add lasting chiefly say looking
+                                    better performing renovation.
+                                </p>
+                            </li>
+                            <li>
+                                <img src="assets/img/shape/arrow.png" alt="Arrrow">
+                                <h4>Deliver expected project</h4>
+                                <p>
+                                    Arose mr rapid in so vexed words. Gay welcome led add lasting chiefly say looking
+                                    better exicution.
+                                </p>
+                            </li>
+                        </ul>
+                        <div class="single-kit mt-30">
+                            <div class="call">
+                                <div class="icon">
+                                    <i class="fas fa-comments-alt-dollar"></i>
+                                </div>
+                                <div class="info">
+                                    <p>Have any Questions?</p>
+                                    <h5><a href="mailto:info@crysta.com">info@crysta.com</a></h5>
+                                </div>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=owhuBrGIOsE"
+                                class="popup-youtube video-play-button with-text">
+                                <div class="effect"></div>
+                                <span><i class="fas fa-play"></i> WATCH PROCESS</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> -->
+    <!-- End Process -->
+
+    <!-- Start Team 
+    ============================================= -->
+    <!-- <div class="team-area text-center overflow-hidden default-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h2 class="sub-title">Our team</h2> -->
+    <!-- <h2 class="title">Meet our expert from <br>trusted source in IT services</h2> -->
+    <!--   </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-full">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="team-carousel swiper"> -->
+    <!-- Additional required wrapper -->
+    <!-- <div class="swiper-wrapper"> -->
+    <!-- Single Item -->
+    <!-- <div class="swiper-slide">
+                                <div class="team-style-one">
+                                    <div class="thumb">
+                                        <img src="assets/img/team/Puja_Bathla.jpg" alt="Thumb">
+                                        <div class="angle-shape"
+                                            style="background-image: url(assets/img/shape/24.png);"></div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="content">
+                                            <h4 class="title"><a href="team-details.html">PUJA BATHLA</a></h4>
+                                            <span>Director and Head of HR & Training Solutions</span>
+                                        </div>
+                                        <ul class="social">
+                                            <li>
+                                                <a class="facebook" href="#">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="twitter" href="#">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="pinterest" href="#">
+                                                    <i class="fab fa-pinterest"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+    <!-- Single Item -->
+    <!--  <div class="swiper-slide">
+                                <div class="team-style-one">
+                                    <div class="thumb">
+                                        <img src="assets/img/team/Mridul1.jpeg" alt="Thumb">
+                                        <div class="angle-shape"
+                                            style="background-image: url(assets/img/shape/24.png);"></div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="content">
+                                            <h4 class="title"><a href="team-details.html">MRIDUL KAUSHIK</a></h4>
+                                            <span>Director and Head of Strategy & Business Development</span>
+                                        </div>
+                                        <ul class="social">
+                                            <li>
+                                                <a class="facebook" href="#">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="twitter" href="#">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="pinterest" href="#">
+                                                    <i class="fab fa-pinterest"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+    <!-- Single Item -->
+    <!-- <div class="swiper-slide">
+                                <div class="team-style-one">
+                                    <div class="thumb">
+                                        <img src="assets/img/team/Vinkal_Kumar.jpg" alt="Thumb">
+                                        <div class="angle-shape"
+                                            style="background-image: url(assets/img/shape/24.png);"></div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="content">
+                                            <h4 class="title"><a href="team-details.html">VINKAL KUMAR</a></h4>
+                                            <span>Director and Head of Training Solutions</span>
+                                        </div>
+                                        <ul class="social">
+                                            <li>
+                                                <a class="facebook" href="#">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="twitter" href="#">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="pinterest" href="#">
+                                                    <i class="fab fa-pinterest"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+    <!-- Single Item -->
+    <!-- <div class="swiper-slide">
+                                <div class="team-style-one">
+                                    <div class="thumb">
+                                        <img src="assets/img/team/Sahil.jpeg" alt="Thumb">
+                                        <div class="angle-shape"
+                                            style="background-image: url(assets/img/shape/24.png);"></div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="content">
+                                            <h4 class="title"><a href="team-details.html">SAHIL KAUSHIK</a></h4>
+                                            <span>Head of Learning Solution</span>
+                                        </div>
+                                        <ul class="social">
+                                            <li>
+                                                <a class="facebook" href="#">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="twitter" href="#">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="pinterest" href="#">
+                                                    <i class="fab fa-pinterest"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+    <!-- Single Item -->
+    <!-- <div class="swiper-slide">
+                                <div class="team-style-one">
+                                    <div class="thumb">
+                                        <img src="assets/img/team/placeholder.gif" alt="Thumb">
+                                        <div class="angle-shape"
+                                            style="background-image: url(assets/img/shape/24.png);"></div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="content">
+                                            <h4 class="title"><a href="team-details.html">SHREYA BATHLA</a></h4>
+                                            <span>Consultant: Millennial Culture</span>
+                                        </div>
+                                        <ul class="social">
+                                            <li>
+                                                <a class="facebook" href="#">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="twitter" href="#">
+                                                    <i class="fab fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="pinterest" href="#">
+                                                    <i class="fab fa-pinterest"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div> -->
+    <!-- End Single Item -->
+    <!-- </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- End Team -->
+
+    <!-- Start Quick Contact 
+    ============================================= -->
+    <!-- <div class="quick-contact-area bg-gradient text-light default-padding"> -->
+    <!-- Shape -->
+    <!-- <div class="shape-left-top" style="background-image: url(assets/img/shape/25.png);"></div> -->
+    <!-- Shape -->
+    <!-- <div class="container"> -->
+    <!-- <div class="row"> -->
+    <!-- <div class="col-xl-3 ">
+                    <div class="quick-contact-style-one">
+                        <h3 class="sub-heading light">CONTACT US</h3>
+                        <p><i class="fab fa-solid fa-location-pin"></i>&nbsp;&nbsp;&nbsp;New Delhi, India</p>
+                        <p><i class="fab fa-pinterest-p"></i>&nbsp;&nbsp;&nbsp;+91-8368100231</p>
+                        <p><i class="fab fa-pinterest-p"></i>&nbsp;&nbsp;&nbsp;contact-us@zispl.com</p>
+                        <p><i class="fab fa-pinterest-p"></i>&nbsp;&nbsp;&nbsp;Monday - Saturday (09:00 PM - 18:30 PM)</p>
+                         <button class="btn btn-primary btn-lg" style="background: #022391">Schedule an Appointment online </button> -->
+
+    <!-- <h2 class="heading">To make requests for further information, contact us via our social channels.</h2>
+                        <ul>
+                            <li>We just need a couple of hours!</li>
+                            <li>No more than 2 working days since receiving your issue ticket.</li>
+                        </ul> -->
+    <!--    </div>
+                </div> -->
+    <!-- <div class="col-xl-2"></div>
+                <div class="col-xl-8">
+                    <h2 class="consultation-form-heading">Schedule an Appointment online</h2>
+                    <form action="https://validthemes.online/themeforest/crysa/assets/mail/contact.php" method="POST"
+                        class="contact-form consultation-form theme">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name">First Name</label>
+                                    <input class="form-control" id="name" name="name" placeholder="First Name"
+                                        type="text">
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name">Last Name</label>
+                                    <input class="form-control" id="name" name="name" placeholder="Last Name"
+                                        type="text">
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input class="form-control" id="email" name="email" placeholder="Email Address"
+                                        type="email">
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input class="form-control" id="phone" name="phone" placeholder="Phone Number"
+                                        type="text">
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name">Subject</label>
+                                    <input class="form-control" id="name" name="name" placeholder="Subject" type="text">
+                                    <span class="alert-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="subject">Choose</label>
+                                    <select id="subject">
+                                        <option value="1">Learning Solutions</option>
+                                        <option value="2">HR Solutions</option>
+                                        <option value="4">Training Solutions</option> -->
+    <!-- <option value="5">Support Items</option>
+                                        <option value="6">Machine Language</option> -->
+    <!-- </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" name="submit" id="submit">
+                                    Get A Free Quote <i class="fas fa-angle-right"></i>
+                                </button>
+                            </div>
+                        </div> -->
+    <!-- Alert Message -->
+    <!-- <div class="col-lg-12 alert-notification">
+                            <div id="message" class="alert-msg"></div>
+                        </div>
+                    </form>
+                    <ul class="contact-list">
+                        <li>
+                            <div class="icon">
+                                <i class="fal fa-user-headset"></i>
+                            </div>
+                            <div class="info">
+                                <h5>Call for Emergency Assistance</h5>
+                                <a href="tel:+4733378901">+4733378901</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div> -->
+    <!-- End Quick Contact -->
+
+    <!-- Start Blog 
+    ============================================= -->
+    <!-- <div class="blog-area blog-grid default-padding bottom-less">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="site-heading text-center">
+                        <h4 class="sub-title">From the blog</h4>
+                        <h2 class="title">Latest News & Articles</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+               
+                <div class="col-xl-4 col-md-6 single-item mt-1">
+                    <div class="blog-style-one">
+                        <div class="thumb">
+                            <a href="blog-single-with-sidebar.html"><img src="assets/img/blog/blog-2.png" alt="Thumb"></a>
+                        </div>
+                        <div class="info">
+                            <div class="meta">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="fal fa-tag"></i> Technology</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="far fa-comment-alt"></i> 12 Comments</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h4 class="title">
+                                <a href="make-onboarding.html">5 PRO TIPS TO MAKE ONBOARDING FUN</a>
+                            </h4>
+                            <p>It is said that the first impression is the last impression. So, it is the first and foremost duty of employers to make onboarding a smooth experience, which encourages employees to build a long-term relationship with the organization. Try adding some fun elements to the onboarding experience.
+                            </p>
+                            <a href="make-onboarding.html">read more</a>
+                             
+                        </div>
+                        <div class="author">
+                            <div class="thumbs">
+                                <a href="#"><img src="assets/img/teams/1.jpg" alt="Author"></a>
+                            </div>
+                            <div class="author-info">
+                                <h5>Bruham Ibrahi</h5>
+                                <span>March 16, 2022</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+               
+                <div class="col-xl-4 col-md-6 single-item mt-1">
+                    <div class="blog-style-one">
+                        <div class="thumb">
+                            <a href="secret-bridge.html"><img src="assets/img/blog/blog-3.jpeg" alt="Thumb"></a>
+                        </div>
+                        <div class="info">
+                            <div class="meta">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="fal fa-tag"></i> Solution</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="far fa-comment-alt"></i> 18 Comments</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h4 class="title">
+                                <a href="secret-bridge.html">THE SECRET TO BRIDGE THE SKILL GAP</a>
+                            </h4>
+                            <p>Training and development come to the rescue at this point though it is ranked lowest in the priority list of an organization. Training helps the employee to perform their current job and development helps the employee to prepare himself for future job responsibilities.</p>
+                            <a href="secret-bridge.html">read more</a>
+                        
+                        </div>
+                        <div class="author">
+                            <div class="thumbs">
+                                <a href="#"><img src="assets/img/teams/6.jpg" alt="Author"></a>
+                            </div>
+                            <div class="author-info">
+                                <h5>Mutuali Bintha</h5>
+                                <span>January 25, 2022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-xl-4 col-md-6 single-item mt-1">
+                    <div class="blog-style-one">
+                        <div class="thumb">
+                            <a href="rescue-training.html"><img src="assets/img/blog/blog-4.jpg" alt="Thumb"></a>
+                        </div>
+                        <div class="info">
+                         
+                            <h4 class="title">
+                                <a href="rescue-training.html">LOCKDOWN: ONLINE TRAININGS TO THE RESCUE</a>
+                            </h4>
+                            <p>While everyone was preparing a To-do list for the upcoming financial year, the outburst of COVID-19 has knocked out all plans. The rising cases around the globe and the lockdown has brought life and businesses to a standstill.So, how do you keep yourself busy during the lockdown</p>
+                            <a href="rescue-training.html">read more</a>
+                         
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="blogs.html" class="ml-auto">See More Blogs&nbsp;&nbsp; <i class="fa-solid fa-chevron-right" style="font-size: 9px;"></i><i class="fa-solid fa-chevron-right" style="font-size: 9px;"></i></a>
+            </div>
+        </div>
+    </div>  -->
+    <!-- End Blog -->
+
+    <!-- Start Footer 
+    ============================================= -->
+    <footer class="bg-dark text-light">
+        <div class="container">
+            <div class="f-items default-padding">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 item">
+                        <div class="f-item about">
+                            <h4 class="widget-title">Our Global Presence</h4>
+
+                            <!-- <h4>Contact Us</h4> -->
+                            <div class="row">
+                                <div class="col-6">
+                                    <img src="assets/img/footer-logo-1.png" width="60px"  class="mb-3 india">
+                                    <div class="indian-contact">
+                                        <div class="d-flex">
+                                        <div class="icon">
+                                            <i class="fa-solid fa-envelope" style="font-size: 20px;"></i>
+                                        </div>
+                                        <div class="content">
+                                            <a href="tel:+91-8368100231">+91-8368100231</a>
+                                            
+                                        </div>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <div class="icon">
+                                                <i class="fa-solid fa-phone" style="font-size: 20px;"></i>
+                                            </div>
+                                            <div class="content">
+                                                <a href="mailto:hr@zispl.com">contact-us@zispl.com</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <img src="assets/img/footer-logo-3.png" width="45px"  class="mb-3 united">
+                                    <div class="indian-contact">
+                                        <div class="d-flex">
+                                        <div class="icon">
+                                            <i class="fa-solid fa-envelope" style="font-size: 20px;"></i>
+                                        </div>
+                                        <div class="content">
+                                            <a href="tel:+31-685504404">+31-685504404</a>
+                                        </div>
+                                        </div>
+
+                                        <div class="d-flex">
+                                            <div class="icon">
+                                                <i class="fa-solid fa-phone" style="font-size: 20px;"></i>
+                                            </div>
+                                            <div class="content">
+                                                
+                                                <a href="mailto:hr@zispl.com">hr@zispl.com</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- <div class="united-contact">
+                                <div class="d-flex">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-envelope" style="font-size: 20px;"></i>
+                                    </div>
+                                    <div class="content">
+                                        <a href="mailto:hr@zispl.com">hr@zispl.com</a>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-phone" style="font-size: 20px;"></i>
+                                    </div>
+                                    <div class="content">
+                                        <a href="tel:+31-685504404">+31-685504404</a>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <ul class="social">
+                                <li>
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </ul>
+
+                            <!-- <a href="index.html"> <img class="logo" src="assets/img/ZISPL_Logo1.png" alt="Logo"></a> -->
+                            <!-- <p>
+                                zKonsult Innovative Solutions Private Limited (ZISPL) is an initiative taken by three
+                                women entrepreneurs who decided to come out of their comfort zones.
+                            </p> -->
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 item">
+                        <div class="f-item link">
+                            <h4 class="widget-title">Subscriptions</h4>
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="fas fa-angle-right"></i> Payment Gateway </a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fas fa-angle-right"></i> Subscribe To Course</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fas fa-angle-right"></i> Subscribe To Newsletters </a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fas fa-angle-right"></i> Download Brochure </a>
+                                </li>
+                                <!--  <li>
+                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> IT Consulting</a>
+                                </li>
+                                <li>
+                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> Software Dev</a>
+                                </li>
+                                <li>
+                                    <a href="services-details.html"><i class="fas fa-angle-right"></i> Backup & Recovery</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 item">
+                        <div class="f-item link">
+                            <h4 class="widget-title">Products</h4>
+                            <ul>
+                                <li>
+                                    <a href="services-2.html"><i class="fas fa-angle-right"></i> Content Development
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="services.html"><i class="fas fa-angle-right"></i> Localization </a>
+                                </li>
+                                <li>
+                                    <a href="classroom.html"><i class="fas fa-angle-right"></i> Classroom </a>
+                                </li>
+                                <li>
+                                    <a href="m-learning.html"><i class="fas fa-angle-right"></i> M-Learning </a>
+                                </li>
+                                <li>
+                                    <a href="blended.html"><i class="fas fa-angle-right"></i> Blended </a>
+                                </li>
+                                <li>
+                                    <a href="e-learning.html"><i class="fas fa-angle-right"></i> E-Learning / Videos
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- <div class="address">
+                                <ul>
+                                    <li>
+                                        New Delhi, India
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <i class="fal fa-clock"></i>
+                                        </div>
+                                        <div class="content">
+                                            <strong>Opening Hours:</strong>
+                                            9:30 AM – 6:30 PM
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="icon">
+                                            <i class="fal fa-user-headset"></i>
+                                        </div>
+                                        <div class="content">
+                                            <strong>Phone:</strong>
+                                            <a href="tel:2151234567">+91-8368100231</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-3 col-md-6 item">
+                        <div class="f-item newsletter">
+                            <h4 class="widget-title">Reach Us</h4>
+
+                            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1752.7004689961727!2d77.1470301126198!3d28.527666200000013!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1d4d388b27a9%3A0xc2d6f719e3a709d5!2szKonsult%20Innovative%20Solutions%20Private%20Limited%20(ZISPL)!5e0!3m2!1sen!2sin!4v1656853123236!5m2!1sen!2sin" width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+
+                        <!-- </div>
+
+                    </div>  -->
+                </div>
+            </div>
+        </div>
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-box">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <p>&copy; Copyright 2022. All Rights Reserved by <a href="#">ZISPL</a></p>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <ul>
+                                <li>
+                                    <a href="about-us.html">Terms</a>
+                                </li>
+                                <li>
+                                    <a href="about-us.html">Privacy</a>
+                                </li>
+                                <li>
+                                    <a href="about-us.html">Support</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Bottom -->
+    </footer>
+    <!-- End Footer -->
+
+    <!-- =======chat box======= -->
+    <!-- <button class="open-button" onclick="openForm()">Chat</button>
+
+    <div class="chat-popup" id="myForm">
+      <form class="form-container">
+        <h1>Chat With Us</h1>
+
+        <label for="msg"><b>Message </b></label>
+        <textarea placeholder="Type message.." name="msg" required></textarea>
+
+        <button type="submit" class="btn">Send</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div> -->
+    <!-- Chatbot -->
+    <div class="botIcon">
+        <div class="botIconContainer">
+            <div class="iconInner">
+                <i class="fa fa-commenting" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="Layout Layout-open Layout-expand Layout-right">
+            <div class="Messenger_messenger">
+                <div class="Messenger_header">
+                    <h4 class="Messenger_prompt text-light">How can we help you?</h4> <span class="chat_close_icon"><i
+                            class="fa fa-window-close" aria-hidden="true"></i></span>
+                </div>
+                <div class="Messenger_content">
+                    <div class="Messages">
+                        <div class="Messages_list"></div>
+                    </div>
+                    <form id="messenger">
+                        <div class="Input Input-blank">
+                            <!-- 							<textarea name="msg" class="Input_field" placeholder="Send a message..."></textarea> -->
+                            <input name="msg" class="Input_field" placeholder="Send a message...">
+                            <button type="submit" class="Input_button Input_button-send">
+                                <div class="Icon">
+                                    <svg viewBox="1496 193 57 54" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g id="Group-9-Copy-3" stroke="none" stroke-width="1" fill="none"
+                                            fill-rule="evenodd"
+                                            transform="translate(1523.000000, 220.000000) rotate(-270.000000) translate(-1523.000000, -220.000000) translate(1499.000000, 193.000000)">
+                                            <path
+                                                d="M5.42994667,44.5306122 L16.5955554,44.5306122 L21.049938,20.423658 C21.6518463,17.1661523 26.3121212,17.1441362 26.9447801,20.3958097 L31.6405465,44.5306122 L42.5313185,44.5306122 L23.9806326,7.0871633 L5.42994667,44.5306122 Z M22.0420732,48.0757124 C21.779222,49.4982538 20.5386331,50.5306122 19.0920112,50.5306122 L1.59009899,50.5306122 C-1.20169244,50.5306122 -2.87079654,47.7697069 -1.64625638,45.2980459 L20.8461928,-0.101616237 C22.1967178,-2.8275701 25.7710778,-2.81438868 27.1150723,-0.101616237 L49.6075215,45.2980459 C5.08414042,47.7885641 49.1422456,50.5306122 46.3613062,50.5306122 L29.1679835,50.5306122 C27.7320366,50.5306122 26.4974445,49.5130766 26.2232033,48.1035608 L24.0760553,37.0678766 L22.0420732,48.0757124 Z"
+                                                id="sendicon" fill="#96AAB4" fill-rule="nonzero"></path>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chatbot -->
+
+    <!-- jQuery Frameworks
+    ============================================= -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.appear.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/modernizr.custom.13711.js"></script>
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/progress-bar.min.js"></script>
+    <script src="assets/js/circle-progress.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/count-to.js"></script>
+    <script src="assets/js/jquery.scrolla.min.js"></script>
+    <script src="assets/js/YTPlayer.min.js"></script>
+    <script src="assets/js/TweenMax.min.js"></script>
+    <script src="assets/js/validnavs.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- <script type="text/javascript">
+        function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+    </script> -->
+    <script>
+        var emailId = "",
+            nowtime = new Date(),
+            nowhoue = nowtime.getHours(),
+            links,
+            chatOnly,
+            replies = [],
+            options = [],
+            chat = [],
+            MessageArry = {
+                "options": {
+                    "send": {
+                        "question": "Send Crypto",
+                        "answer1": ["Please select a coin with your facing an issue to send."],
+                        "answer2": ["Please enter the address of coin."],
+                        "sub-options": {
+                            "coin": {
+                                "BTC": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "ETH": "https://arkonx.com/site_assets/images/ether.png",
+                                "ETC": "https://arkonx.com/site_assets/images/etcr.png",
+                                "BCH": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "LTC": "https://arkonx.com/site_assets/images/litecoin.png",
+                                "DASH": "https://arkonx.com/site_assets/images/dash.png",
+                                "DOGE": "https://arkonx.com/site_assets/images/doge.png",
+                                "DAI": "https://arkonx.com/site_assets/images/dai.png"
+                            }
+                        }
+                    },
+                    "receive": {
+                        "question": "Receive Crypto",
+                        "answer1": ["Please select a coin with your facing an issue receive."],
+                        "answer2": ["Please enter the address of coin."],
+                        "sub-options": {
+                            "coin": {
+                                "BTC": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "ETH": "https://arkonx.com/site_assets/images/ether.png",
+                                "ETC": "https://arkonx.com/site_assets/images/etcr.png",
+                                "BCH": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "LTC": "https://arkonx.com/site_assets/images/litecoin.png",
+                                "DASH": "https://arkonx.com/site_assets/images/dash.png",
+                                "DOGE": "https://arkonx.com/site_assets/images/doge.png",
+                                "DAI": "https://arkonx.com/site_assets/images/dai.png"
+                            }
+                        }
+                    },
+                    "buy": {
+                        "question": "Buy Crypto",
+                        "answer1": ["Please select a coin with your facing an issue to buy."],
+                        "answer2": ["Please enter the address of coin."],
+                        "sub-options": {
+                            "coin": {
+                                "BTC": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "ETH": "https://arkonx.com/site_assets/images/ether.png",
+                                "ETC": "https://arkonx.com/site_assets/images/etcr.png",
+                                "BCH": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "LTC": "https://arkonx.com/site_assets/images/litecoin.png",
+                                "DASH": "https://arkonx.com/site_assets/images/dash.png",
+                                "DOGE": "https://arkonx.com/site_assets/images/doge.png",
+                                "DAI": "https://arkonx.com/site_assets/images/dai.png"
+                            }
+                        }
+                    },
+                    "exchange": {
+                        "question": "Instant Exchange",
+                        "answer1": ["Please select a coin you want to exchange."],
+                        "answer2": ["Please select a coin you want to exchange with."],
+                        "sub-options": {
+                            "coin": {
+                                "BTC": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "ETH": "https://arkonx.com/site_assets/images/ether.png",
+                                "ETC": "https://arkonx.com/site_assets/images/etcr.png",
+                                "BCH": "https://arkonx.com/site_assets/images/Bitcoin.png",
+                                "LTC": "https://arkonx.com/site_assets/images/litecoin.png",
+                                "DASH": "https://arkonx.com/site_assets/images/dash.png",
+                                "DOGE": "https://arkonx.com/site_assets/images/doge.png",
+                                "DAI": "https://arkonx.com/site_assets/images/dai.png"
+                            }
+                        }
+                    },
+                    "other": {
+                        "question": "other",
+                        "answer1": [
+                            "We apologise for the inconvenience, please submit your issue so that our Agent can help you out."
+
+                        ]
+                    }
+                },
+                "answers": {
+                    "reply": {
+                        "greetings": [
+                            "Greetings, Agent! Welcome to Arkonx Wallet & Exchange Support. <br><br>Please describe your issue to view suggested articles and FAQs from our help center or type 'Skip' to activate Remy, our Arkonx Wallet & Exchange support bot, who will help you submit a ticket to our (human) team. Note that it can take a few hours to receive a response from them."
+                        ],
+                        "suggested": [
+                            "Hey! I'm Remy, the Arkonx Wallet & Exchange Support bot. I'm going to ask you a few questions so I can help direct you to the right place. Which of these categories most accurately describes your question?",
+                            "Please select the appropriate category based on the issue you're facing."
+                        ],
+                        "details": [
+                            "If you have any additional details, please share it with us. This might help us in resolving your issue promptly."
+                        ],
+                        "common": [
+                            "Thank you! I've shared all the information with my (human) team, and you will receive an update in a few hours. Meanwhile, if you would like to send any additional information, like screenshots, you can do so by clicking the paper-clip icon at the bottom right corner of this chat window."
+                        ]
+                    }
+                }
+            };
+
+        function checklist() {
+            $.ajax({
+                url: '/check-chat-ticket',
+                type: "GET",
+                cache: false,
+                success: function (htmldata) {
+                    if (htmldata != 'no') {
+                        $('.Messages_list').html('');
+                        $('.Messages_list').append(htmldata);
+                        scrollToLastMsg();
+                    } else {
+                        // newChat();
+                        return;
+                    }
+                }
+            });
+        }
+
+        function submitForm(funOptions) {
+            var opt = {
+                msgType: '',
+                target: '',
+                newTarget: '',
+                msg: '',
+                link: '',
+                answer: '',
+                userMsg: ''
+            },
+                $output = [],
+                mainval = jQuery("[name=msg]").val(),
+                obj = $.extend(opt, funOptions);
+
+            if (obj.msgType == "coinSelector") {
+                if (obj.link == "") {
+                    loop(MessageArry.answers.reply.details);
+                    jQuery(document).find('#messengerExchange').attr('id', 'messengerDetails');
+                    jQuery('.botIcon').addClass('showMessenger');
+                } else if (obj.answer == "answer1" && obj.link != "other") {
+                    linksArry = MessageArry.options[obj.link]['sub-options'].coin,
+                        optionlinks = '';
+
+                    $.each(linksArry, function (key, value) {
+                        optionlinks += '<span class="btns_link sub_btns_link" data-links="' + key + '">' + key + '</span>'
+                    });
+                    loop(MessageArry.options[obj.link][obj.answer]);
+                    jQuery('.Messages_list').append('<div class="msg user" id="replace"><span class="responsText">' + optionlinks + '</span></div>');
+                } else {
+                    loop(MessageArry.options[obj.link][obj.answer]);
+                    if (obj.link == "exchange") {
+                        linksArry = MessageArry.options[obj.link]['sub-options'].coin,
+                            optionlinks = '';
+
+                        $.each(linksArry, function (key, value) {
+                            optionlinks += '<span class="btns_link exchange_btns_link" data-links="' + key + '">' + key + '</span>'
+                        });
+                        jQuery('.Messages_list').append('<div class="msg user" id="replace"><span class="responsText">' + optionlinks + '</span></div>');
+                    } else {
+                        jQuery('.botIcon').addClass('showMessenger');
+                    }
+                }
+            } else if (obj.msgType == "skip") {
+                jQuery('.botIcon').removeClass('showMessenger');
+                userMsg(mainval);
+                appendMsg();
+                jQuery("[name=msg]").val('');
+            } else if (obj.msgType == "details") {
+                jQuery(document).find(obj.target).attr('id', obj.newTarget);
+                userMsg(mainval);
+                appendMsg(obj.msg);
+
+            } else if (obj.msgType == "common") {
+                userMsg(mainval);
+
+                jQuery("[name=msg]").val('');
+            } else { }
+
+            $output.push({
+                "MessageType": obj.msgType,
+                "targetForm": obj.target,
+                "newTargetId": obj.newTarget,
+                "botreply": obj.msg,
+                "link": obj.link,
+                "answer": obj.answer,
+                "userMedsage": obj.userMsg,
+                "selectedOption": obj.userMsg
+            });
+            var msg = jQuery('.Messages_list').html();
+            $.get('/chat-ticket', { msg: msg }, function (data) {
+                // setTimeout(function(){ checklist(); }, 9000);  
+            });
+            scrollToLastMsg();
+            return $output;
+
+        }
+
+        function scrollToLastMsg() {
+            var lastMsg = jQuery('.Messages_list').find('.msg').last().offset().top;
+            jQuery('.Messages').animate({ scrollTop: lastMsg }, 'slow');
+
+        }
+
+        function newChat() {
+            chat.push(jQuery('.Messages_list').html());
+            jQuery('.Messages_list').html('');
+
+            appendMsg('greetings');
+            if (!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+                jQuery("[name='msg']").focus();
+            }
+            jQuery(document).find('#messengerCommon').attr('id', 'messenger');
+            jQuery(this).parents('.botIcon').addClass('showMessenger');
+        }
+
+        function loop(messages) {
+            for (var i = 0; i < messages.length; i++) {
+                let message = messages[i];
+                jQuery('.Messages_list').append('<div class="msg"><span class="responsText">' + message + '</span></div>');
+            }
+        }
+
+        function userMsg(msg = "") {
+            var rtnMsg = '<div class="msg user"><span class="responsText">' + msg + '</span></div>';
+            jQuery('.Messages_list').append(rtnMsg);
+
+            return rtnMsg;
+        };
+
+        function appendMsg(msg = "") {
+            var messages;
+            if (msg == "greetings") {
+                messages = MessageArry.answers.reply.greetings;
+                loop(messages);
+            } else if (msg == "details") {
+                messages = MessageArry.answers.reply.details;
+                loop(messages);
+            } else if (msg == "common") {
+                messages = MessageArry.answers.reply.common;
+                loop(messages);
+                // jQuery('.Messages_list').append('<div class="msg user"><span class="responsText"><span class="btns_link new_btns_link alterBtn">New Chat</span></span></div>');
+            } else {
+                messages = MessageArry.answers.reply.suggested;
+                loop(messages);
+
+                replies = MessageArry.answers.reply,
+                    options = MessageArry.options,
+                    btns = '';
+
+                $.each(options, function (key, value) {
+                    btns += '<span class="btns_link main_btns_link" data-links="' + key + '">' + value.question + '</span>';
+                });
+                jQuery('.Messages_list').append('<div class="msg user" id="replace"><span class="responsText">' + btns + '</span></div>');
+            }
+            jQuery("[name='msg']").val("");
+        };
+
+        jQuery(document).ready(function ($) {
+
+
+            jQuery(document).on('click', '.iconInner', function (e) {
+                jQuery(this).parents('.botIcon').addClass('showBotSubject');
+                $("form").attr('id', 'messengerCommon');
+                if (!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))) {
+                    jQuery("[name='msg']").focus();
+                }
+                jQuery(this).parents('.botIcon').addClass('showMessenger');
+            });
+
+            jQuery(document).on('click', '.closeBtn, .chat_close_icon', function (e) {
+                jQuery(this).parents('.botIcon').removeClass('showBotSubject').removeClass('showMessenger');
+                chat.push(jQuery('.Messages_list').html());
+            });
+
+            /* Chatboat Code */
+            jQuery(document).on("submit", '.Messenger_content form', (e) => {
+                e.preventDefault();
+                var mainval = jQuery("[name=msg]").val(),
+                    thisEl = jQuery(this),
+                    thisId = jQuery(document).find('.Messenger_content form').attr('id');
+
+                if (mainval != '') {
+                    if (thisId == "messengerAddress" || thisId == "messengerExchange") {
+                        submitForm({
+                            msgType: 'details',
+                            target: '#' + thisId,
+                            newTarget: 'messengerDetails',
+                            msg: 'details'
+                        });
+                    } else if (thisId == "messengerDetails" || thisId == "messengerOther" || thisId == "messengerAddress") {
+                        submitForm({
+                            msgType: 'details',
+                            target: '#' + thisId,
+                            newTarget: 'messengerCommon',
+                            msg: 'common'
+                        });
+                    } else if (thisId == "messengerCommon") {
+                        submitForm({
+                            msgType: 'common',
+                        });
+                    } else if (mainval == "skip") {
+                        submitForm({
+                            msgType: 'skip'
+                        });
+                    }
+                }
+                // scrollToLastMsg();
+            });
+
+            jQuery(document).on('click', '.responsText .main_btns_link', function (event) {
+                event.preventDefault();
+                links = jQuery(this).data('links');
+                if (links == "send" || links == "receive" || links == "buy") {
+                    jQuery(document).find('#messenger').attr('id', 'messengerAddress');
+                } else if (links == "exchange") {
+                    jQuery(document).find('#messenger').attr('id', 'messengerExchange');
+                } else {
+                    jQuery(document).find('#messenger').attr('id', 'messengerOther');
+                }
+                jQuery(document).find('#replace').removeAttr('id').html('<span class="responsText">' + jQuery(this).text() + '</span>');
+                submitForm({
+                    msgType: 'coinSelector',
+                    link: links,
+                    answer: "answer1",
+                    userMsg: '<div class="msg user"><span class="responsText">' + jQuery(this).text() + '</span></div>'
+                });
+                // scrollToLastMsg();
+            });
+            jQuery(document).on('click', '.responsText .sub_btns_link', function (event) {
+                event.preventDefault();
+                jQuery(document).find('#replace').removeAttr('id').html('<span class="responsText">' + jQuery(this).text() + '</span>');
+                submitForm({
+                    msgType: 'coinSelector',
+                    link: links,
+                    answer: "answer2",
+                    userMsg: '<div class="msg user"><span class="responsText">' + jQuery(this).text() + '</span></div>'
+                });
+                // scrollToLastMsg();
+            });
+            jQuery(document).on('click', '.responsText .exchange_btns_link', function (event) {
+                event.preventDefault();
+                links = "";
+                jQuery(document).find('#replace').removeAttr('id').html('<span class="responsText">' + jQuery(this).text() + '</span>');
+                submitForm({
+                    msgType: 'coinSelector',
+                    link: links,
+                    answer: "details",
+                    userMsg: '<div class="msg user"><span class="responsText">' + jQuery(this).text() + '</span></div>'
+                });
+                //  scrollToLastMsg();
+            });
+            /* Chatboat Code */
+
+            /* New Chat */
+            jQuery(document).on('click', '.new_btns_link', function (event) {
+                event.preventDefault();
+                newChat();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
